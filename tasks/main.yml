@@ -1,2 +1,37 @@
 ---
 # tasks file for consul
+# Install Consul
+- name: Download and unzip Consul
+  unarchive:
+    src: https://releases.hashicorp.com/consul/{{consul_version}}/consul_{{consul_version}}_linux_amd64.zip
+    dest: /usr/local/sbin
+    remote_src: yes
+- name: Create consul user
+  user:
+    name: consul
+    system: yes
+    state: present
+    home: /etc/consul.d
+    create_home: true
+- name: Create consul data directory
+  file:
+    path: /opt/consul
+    state: directory
+    owner: consul
+    group: consul
+    mode: '0755'
+- name: Create consul configuration file
+  template:
+    src: consul.hcl.j2
+    dest: /etc/consul.d/consul.hcl
+    owner: consul
+    group: consul
+- name: Create systemd service
+  template:
+    src: consul.service.j2
+    dest: /etc/systemd/system/consul.service
+- name: Start and enable consul
+  systemd:
+    name: consul
+    state: started
+    enabled: yes

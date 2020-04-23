@@ -1,2 +1,5 @@
 ---
 # vars file for consul
+consul_ver: 1.7.2
+consul_dc: "PBX"
+consul_secret: "oZyzF64b5WFDaDPWYL1HjyffhmhbAz0X4MffByaNkWs="
