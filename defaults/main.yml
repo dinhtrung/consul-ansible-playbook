@@ -1,2 +1,5 @@
 ---
 # defaults file for consul
+consul_version: 1.7.2
+consul_dc: "DC1"
+consul_secret: "oZyzF64b5WFDaDPWYL1HjyffhmhbAz0X4MffByaNkWs="
